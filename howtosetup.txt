@@ -1,0 +1,2 @@
+chmod +x extract_map.sh
+./extract_map.sh
