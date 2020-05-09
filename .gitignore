@@ -1,3 +1,6 @@
 geojson
-indonesia_villages_border.geojson.zip
-*.zip
+le_note
+.env_dev
+.env
+.env_test
+*.save
