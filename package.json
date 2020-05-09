@@ -1,0 +1,29 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "express server",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thejatmik/border-desa-indonesia-geojson.git"
+  },
+  "author": "jatmika teja",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thejatmik/border-desa-indonesia-geojson/issues"
+  },
+  "homepage": "https://github.com/thejatmik/border-desa-indonesia-geojson#readme",
+  "dependencies": {
+    "apollo-server-express": "^2.13.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "graphql": "^15.0.0",
+    "mongodb": "^3.5.7",
+    "path": "^0.12.7",
+    "stream": "0.0.2",
+    "stream-json": "^1.5.0"
+  }
+}

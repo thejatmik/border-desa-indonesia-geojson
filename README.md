@@ -8,7 +8,7 @@
 
 ### Instalasi
 Extract file *.zip
-- `chmod u+x extract_map.sh && ./extract_map.sh`  
+- `chmod +x extract_map.sh && ./extract_map.sh`  
 - `npm install`
 - `node mongodbSeed.js`
 

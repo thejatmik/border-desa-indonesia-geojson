@@ -1,6 +1,8 @@
+node_modules
 geojson
 le_note
 .env_dev
 .env
 .env_test
 *.save
+package-lock.json
