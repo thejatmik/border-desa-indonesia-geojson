@@ -16,6 +16,14 @@ const typeDefs = gql`
   type Query {
     hello: String
     village: Village
+    villages(
+      limit: Int!
+      skip: Int
+      options: Object
+    ): [Village]
+    search(
+      keyword: String
+    ): [Village]
   }
 `;
 
