@@ -1,5 +1,4 @@
 const assert = require('assert');
-const dissolve = require('@turf/dissolve');
 const turf = require('@turf/turf');
 
 const db = require('../db/village_mongodb').getDB();
@@ -135,10 +134,15 @@ const resolvers = {
       province = province.toUpperCase()
       district = district.toUpperCase()
       sub_district = sub_district.toUpperCase()
+      
+      console.log(province, district, sub_district)
+      let compiledBorder = []
+      let combinedBorder = []
 
       return new Promise((resolve, reject) => {
         Village.distinct('village', { province, district, sub_district })
-          .then(villageList => {  
+          .then(villageList => {
+            console.log(villageList)
             let findVillages = []
             villageList.forEach(village => {
               findVillages.push(Village.findOne({ province, district, sub_district, village }))
@@ -146,20 +150,43 @@ const resolvers = {
             return Promise.all(findVillages)
           })
           .then(results => {
-            let compiledBorder = results.map(village => {
-              return turf.polygon(village.border.coordinates, {combine: "yes"})
+            // let compiledBorder = []
+            // polygonize, lineToPolygon
+            results.forEach(village => {
+              const lenCoor = village.border.coordinates.map(item => item.length)
+              console.log(lenCoor, village.village)
+              if (village.border.coordinates[0].length >= 4) {
+                compiledBorder.push(turf.polygon(village.border.coordinates, {combine: "yes"}))
+                // const line = turf.multiLineString(village.border.coordinates)
+                // const polygon =turf.lineToPolygon(line)
+                // combinedBorder.push(polygon)
+              }
             })
             
-            let features = turf.featureCollection(compiledBorder)
+            // let features = turf.featureCollection(compiledBorder)
+            // let flatten = turf.flatten(turf.multiPolygon(combinedBorder))
+            // flatten = turf.dissolve(flatten)
+            // flatten = turf.combine(flatten)
+            // console.log(flatten)
+            // console.log(compiledBorder)
+            // console.log(features)
             
-            let dissolved = turf.dissolve(features, { propertyName: 'combine' });
-            
+            // combine, dissolve
+            // let dissolved = turf.union(features, { propertyName: 'combine' });
+            let union = turf.union(...compiledBorder)
+            // console.log(union)
+            // turf.flatten(multiGeometry);
             resolve({
               province,
               district,
               sub_district,
-              border: dissolved.features[0].geometry
+              border: union.geometry,
+              geojson: union
             })
+          })
+          .catch(err => {
+            console.log(err.message)
+            // console.log(compiledBorder)
           })
       })
     }

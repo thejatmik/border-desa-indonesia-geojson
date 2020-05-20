@@ -56,6 +56,10 @@ mongoVillage.connectToServer()
         assert(typeof value.village == 'string', 'village must be a string');
         assert(typeof value.border == 'object' && Array.isArray(value.border), 'border must be an array');
         console.log(`${value.province}, ${value.district}, ${value.sub_district}, ${value.village}`)
+
+        const flippedBorder = value.border.map(item => {
+          return [item[1], item[0]]
+        })
         
         db
           .collection(collection)
@@ -74,7 +78,7 @@ mongoVillage.connectToServer()
                 village: value.village,
                 border: {
                   type: "Polygon",
-                  coordinates: [ value.border ],
+                  coordinates: [ flippedBorder ],
                 }
               }
             },

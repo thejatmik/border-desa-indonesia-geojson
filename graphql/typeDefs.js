@@ -57,6 +57,7 @@ const typeDefs = gql`
     district: String
     sub_district: String
     border: Object
+    geojson: Object
   }
 
   type District {
