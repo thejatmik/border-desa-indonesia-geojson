@@ -8,12 +8,20 @@
 
 ### Instalasi
 Extract file *.zip
-- `chmod +x extract_map.sh && ./extract_map.sh`  
-- `npm install`
-- `node mongodbSeed.js`
+- Enable extract script : `chmod +x extract_map.sh && ./extract_map.sh`  
+- Install dependencies : `npm install`  
+- After steps above, you can seed to MongoDB database and create GraphQL server  
 
-## Mongo Shell
-- `use village`
+## Database (MongoDB) seed  
+- `node mongodbSeed.js`  
+
+## GraphQL Server (dev)  
+- `npm run dev`  
+- development server will run on `http://localhost:3000/graphql`  
+- Documentation (generated with graphdoc) `./doc/schema/index.html`  
+
+## Mongo Shell  
+- `use village`  
 - Village count: 
     - `db.Village.find().count()`
 - Polygon search :  
